@@ -67,5 +67,9 @@ Serve para o arquivo MDF. Opção que foi marcada na tela de configuração de c
 
 - Em restore, com isso habilitado ao invés do SQL limpar o MDF para depois gravar os arquivos do restore, o SQL vai gravar por cima, evitando a demora nessa limpeza.
 - Melhora também o tempo de criação de novas bases do crescimento
-- Em instância já instalada que não está habilitado, é necessário parar o banco para habilitar
+- Em instância já instalada que não está habilitado, é necessário parar o banco para habilitar.
+
+## CONFIGURAR E-MAIL
+
+Essencial para receber alertas sobre o banco de dados.
 
