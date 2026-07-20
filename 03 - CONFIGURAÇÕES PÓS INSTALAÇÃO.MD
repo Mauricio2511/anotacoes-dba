@@ -40,4 +40,32 @@ Recomendação:
 
 ## PARALELISMO
 
+Quantidade de cores que o SQL usa para realizar uma query
+
+- MAX DEGRER OF PARALLELISM
+  - A recomendação é limitar a quantidade de cores que poderão ser usados em uma query. Máximo recomendado é apenas 8 cores. Por padrão vem 8 que indica que o SQL usará todos os cores
+
+- COST THERESHOLD FOR PARALELISM
+  - Definir também a partir de qual custo uma query deverá usar paralelismo. Por padrão vem 5, mas pode aumentar pra cima de 35 que não terá problema
+
+
+## ERRO LOG
+
+- Sempre o o SQL reiniciado, é criado um novo arquivo.
+- Ideal é aumentar para +-20 a quantidade de arquivo de ERROR LOG.
+
+Os arquivos de erros log crescem rápidos. Para evitar arquivos gigantes, criar um JOB para rodar semanalmente a SP abaixo:
+
+exec sp_cycle_errorlog
+
+Essa SP vai criar um novo arquivo de error log. Cada arquivo terá 1 semana de error log.
+
+
+## INSTANTE FILE INITIALIZATION
+
+Serve para o arquivo MDF. Opção que foi marcada na tela de configuração de contas e collation
+
+- Em restore, com isso habilitado ao invés do SQL limpar o MDF para depois gravar os arquivos do restore, o SQL vai gravar por cima, evitando a demora nessa limpeza.
+- Melhora também o tempo de criação de novas bases do crescimento
+- Em instância já instalada que não está habilitado, é necessário parar o banco para habilitar
 
