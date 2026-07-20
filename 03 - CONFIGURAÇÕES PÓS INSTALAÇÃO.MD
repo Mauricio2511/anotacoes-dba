@@ -72,4 +72,3 @@ Serve para o arquivo MDF. Opção que foi marcada na tela de configuração de c
 ## CONFIGURAR E-MAIL
 
 Essencial para receber alertas sobre o banco de dados.
-
