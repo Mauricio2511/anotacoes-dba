@@ -18,5 +18,5 @@
 
 ## TEMPDB
 
-- Uma das bases com mais I/O em qualquer ambiente SQL Server
+- Uma das bases que pode ter mais I/O em um ambiente SQL Server
 - É utilizada para tabelas temporárias, cursores, tabelas variável, rebuild ONLINE de índices, order by e group by(em caso de pouca memória) e etc.
