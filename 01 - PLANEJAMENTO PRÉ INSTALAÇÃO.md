@@ -6,10 +6,10 @@
 
 Versões:
 
-- **Enterprise** (Funcionalidades ilimitadas dentro do que o SQL Server entrega) / Mais cara
+- **Enterprise** (Edição com o conjunto mais completo de funcionalidades e maiores limites de hardware) / Mais cara
 - **Standard** (Funcionalidades e hardware limitados, mas geralmente atende bem até grandes negócios) Mais em conta 
-- **Developer** (Possui recursos da versão Enterprise, porém é proibida para utilizar em ambiente de produção) gratuita
-- **Web** (Mais usada em datacenter), não utilizado em empresa
+- **Developer** (Possui recursos da versão Enterprise, mas não pode ser usada em ambientes de produção) gratuita
+- **Web** (Edição voltada principalmente para hospedagem de sites e aplicações por provedores de serviços), muito comum em datacenters
 - **Express** (Muitas limitações de hardware e funcionalidades), em algumas empresas pequenas pode até ser utilizado, exemplo: padaria ou mercado pequenos.
 
 # 2. PLANEJAR ONDE SERÁ INSTALADO
@@ -17,7 +17,7 @@ Versões:
 - Binários
 - Base de dados
     - Dados, Log, TEMPDB (ideal é separar cada um deles em um disco diferente). Dificilmente é possível separar, mas se conseguir, separar Dados e Log
-    - RAID(SSD) (1, 5, e 10) Melhor é o 10, o 5 é ruim para escrita
+    - RAID (1, 5 e 10): O RAID 10 geralmente oferece melhor desempenho de escrita e redundância. O RAID 5 não é tão bom para escrita.
 
 # 3. DEFINIR A COLLATION QUE VAI SER UTILIZADA PELA INSTÂNCIA
 
@@ -29,26 +29,25 @@ Versões:
 
 - Existe Collation na instância e também cada base pode ter uma collation diferente
   - Ficar atento a collation da base ser diferente, pois pode dar problema ao fazer query comparando string com a TEMPDB ou com uma base de collation diferente.
-- Caso instale a instância com collation errada, o mais recomendado e reinstalar com a correta
+- Caso instale a instância com a collation errada, será necessário avaliar a reinstalação da instância ou a reconstrução das bases de sistema com a collation correta. Reinstalar a instância é menos trabalhoso e recomendado.
 - Collation pode impactar na performance.
 - Ao criar um novo banco se não definir a collation ele terá a mesma collation da instância
 
-COLLATION CI_AI: (MELHOR DE SER UTILIZADA POR SER INSENSITIVE)
-  - CI: Permite encontrar letras independente se a letra é maiuscula ou minuscula
-  - AI: Permite encontrar letras com ou sem acento
+COLLATION CI_AI: Pode ser utilizada quando a aplicação não precisa diferenciar letras maiúsculas e minúsculas nem caracteres com e sem acento.  
+- CI: Permite encontrar letras independente se a letra é maiuscula ou minuscula
+- AI: Permite encontrar letras com ou sem acento
 
 # 4. DEFINIR AS CONTAS DE SERVIÇO DO SQL SERVER
 
 - Contas de domínio(uma por serviço)
 - Recomendação(pelo menos 1 conta de domínio para o Agent e outra para o MSSQL Server), não precisam ser administrador da máquina
 - Se usar as constas acima no momento da instalação, o próprio SQL da as permissões necessárias para cada conta
-- Não precisa ser administrado local do servidor para instalar o SQL Server
+- O usuário que executa a instalação precisa ter permissão de administrador local. As contas utilizadas pelos serviços do SQL Server não precisam ser administradoras locais.
 
 
 # 5. DEFINIR QUAIS RECURSOS E SERVIÇOS SERÃO INSTALADOS
 
-- Reporting Service, Analyses Service, Integration Services(Integration Services, é uma boa instalar por conta das funcionalidades e também não é um pacote pesado, é um recurso leve)
-
+Reporting Services, Analysis Services e Integration Services: Instalar somente os recursos e serviços que serão utilizados no ambiente.
 
 # 6. PLANO DE ENERGIA DO SERVIDOR
 
