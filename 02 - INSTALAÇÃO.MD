@@ -47,7 +47,7 @@ COLLATION: Definir a Collation
 ## DATABASE ENGINE CONFIGURATION
 
 SERVER CONFIGURATION:
-- Marcar MIXED MODE (SQL SERVER AUTHENTICATION AND WINDOWS AUTHENTICATION): Essa opção habilita a criação de usuários para o SQL SERVER, ao marcar essa opção também é criado o usuário SA que tem permissão de SIS admim.
+- Marcar MIXED MODE (SQL SERVER AUTHENTICATION AND WINDOWS AUTHENTICATION): Essa opção permite utilizar a autenticação do Windows e também logins do SQL Server. Ao marcar essa opção, é necessário definir uma senha para o login SA, que possui permissão de sysadmin.
 - Definir uma senha segura para o SA, nos campos que pedem password.
 - Adicionar o usuário da máquina que está fazendo a instalação como Administrador em ADD CURRENT USER.
 
@@ -57,22 +57,22 @@ DATA DIRECTORIES:
 TEMPDB:
 Essa tela é para configuração de arquivos para TempDB
 
-- O recomendado é deixar apenas 1 arquivo
-- Adicionar novos arquivos caso receba em WAIT INFO (PAGELATCH)
-- Em bancos grandes é possível ter a necessidade de mais de 1 arquivo
-- O indicado é usar no máximo 8 arquivos de log. Por padrão o SQL indica 1 por core do processados. 
+- Por padrão, o SQL Server pode configurar até 8 arquivos de dados para a TempDB, de acordo com a quantidade de processadores lógicos disponíveis.
+- Avaliar a adição de novos arquivos de dados caso seja identificada contenção na TempDB relacionada a PAGELATCH_UP ou PAGELATCH_EX.
+- Dependendo da quantidade de processadores lógicos e da carga do ambiente, pode ser necessário utilizar mais de 1 arquivo de dados na TempDB.
+- O indicado inicialmente é utilizar até 8 arquivos de dados, de acordo com a quantidade de processadores lógicos. Normalmente, a TempDB utiliza apenas 1 arquivo de log.
 - Pode deixar o que vem por padrão/default
 
 
 Opções importantes para verificar:
 
-- Initial size MB: Por padrão vem 8MB, mas pode aumentar, pois é muito pouco o padrão. Existe casos de 1GB para o TempDB. Cada caso deve ser analisado
-- Initial size MB do TempDB Log file segue a mesma lógica acima
+- Initial size MB: Definir o tamanho inicial de acordo com a carga do ambiente, evitando crescimentos frequentes. Os arquivos de dados da TempDB devem possuir o mesmo tamanho e a mesma configuração de crescimento.
+- Initial size MB do TempDB Log file: Definir o tamanho inicial de acordo com a utilização do ambiente, evitando crescimentos frequentes do arquivo de log.
 
 É possível alterar após o SQL Server estar instalado
 
 FILESTREAM
-Habilita quando vai trabalhar com arquivos muito grandes. Caso para ser analisado.
+Habilita quando vai trabalhar com arquivos muito grandes. Caso para ser analisado. Habilitar quando a aplicação precisar armazenar dados VARBINARY(MAX) no sistema de arquivos utilizando o controle transacional do SQL Server. Cada caso deve ser analisado.
 
 
 ## INSTALL
