@@ -14,8 +14,6 @@ Usado pelos arquivos secundários de dados
 NDF = Not Master Data File
 
 
---
-
 ## Pontos importantes na criação de uma Database
 
 Todos pontos abaixo já vem um padrão do SQL Server, mas não é recomendado manter.
@@ -50,8 +48,6 @@ Todos pontos abaixo já vem um padrão do SQL Server, mas não é recomendado ma
 
 
 - Recovery Model
-
---
 
 
 
