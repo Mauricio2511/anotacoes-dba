@@ -24,7 +24,7 @@ USER MAPPING
 - Em boa parte dos casos usará somente:
   - db_owner: usuário que precise fazer tudo dentro da database 
   - db_datareader: usuário que precisa ler todas as tabelas, views e functions(acesso de leitura, usar SELECT) 
-  - db_datariter: usuário que precisa fazer insert, update e delete(acesso de escrita)
+  - db_datawriter: usuário que precisa fazer insert, update e delete(acesso de escrita)
 
 
 # SEGURANÇA A NÍVEL DE OBJETOS(TABELAS, VIEWS, FUNCTIONS, PROCEDURE)
@@ -34,7 +34,7 @@ GRANT:
   - GRANT EXECUTE ON PROCEDURE TO USUARIO
 
 DENY
-  - DENY SELEC, UPDATE, INSERT ON OBJETO TO USUARIO
+  - DENY SELECT, UPDATE, INSERT ON OBJETO TO USUARIO
 
 REVOKE
   - REVOKE SELECT ON OBJETO TO USUARIO
