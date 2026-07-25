@@ -106,16 +106,77 @@ NUMERIC
 
 - Constraints
   - Primary Key
+    - Somente 1 por tabela
+
   - Foreingn Key
+    - Coluna que referencia a PK de outra tabela criando relação entre elas
+
   - Unique
+    - Define campos como únicos
+    - pode ter mais de 1 por tabela
+
   - Check
+    - Validação realizada no momento do insert
+
   - Default
+    - Valor default será inserido para uma coluna quando não for especificado no insert
+
+SELECIONAR A TABELA E ALT + F1 PARA VERIFICAR NOME, DATA DE CRIAÇÃO, TODAS AS COLUNAS, TIPOS DE DADOS, COLLATION, INDEXS, CONSTRAINTS
 
 
 
+# LINKED SERVER
+
+- Funcionalidade do SQL para estabelecer conexão entre dois servidores
+- Comunicação entre fontes OLE DB, como Excel, Acess, servidores SQL Server e até servidores como Oracle, MySql, Sybase
+- USAR COM MODERAÇÃO EM PRODUÇÃO!!! Em tabelas grandes, ele pode causar locks e queries lentas. Muito lento para grandes volumes.
 
 
+# DETACH E ATTACH
 
+DETACH
+  - Retira base de dados do SQL (MDF e LDF)
+
+ATTACH
+  - Coloca a base no SQL
+
+Usado para mover base de um disco para o outro, mudar de servidor. 
+
+Recomendado realizar backup e restore
+
+Outra opção sem usar DETACH E ATTACH
+
+  1 - Rodas o comando: ALTER DATABASE NOME SET OFFLINE(ninguém pode estar conectado na base)
+  2 - Alterar o caminho dos arquivos na master com o ALTER DATABASE
+  3 - Copiar os arquivos para os novos locais
+  4 - Rodas o comando: ALTER DATABASE NOME SET ONLINE
+
+
+# SHRINK
+
+Reduz tamanho de arquivo MDF, LDF e NDF do SQL Server.
+
+1 - Quando usar? Detelou uma tabela gigante, mas o disco continua usando o tamanho daquele arquivo
+
+Quando deleta uma tabela o dado não é liberado no disco, apenas dentro do MDF. O disco fica alocado por isso continua usando o espaço em disco.
+
+2 - Quando usar? Fez update gigante ou inseriu muitos dados de uma vez, o LOG vai CRESCER MUITO. Pode rodar o SHRINK para reduzir o tamanho.
+
+Problemas:
+- Demora muito para rodar
+- Índices/Banco ficam fragmentados
+
+Usar somente se realmente for necessário, quando é um espaço realmente que vale a pena
+É preciso de uma janela de preferência final de semana quando o banco não está em uso
+Após usar SHRINK, é necessário REBUILD nos Índices para desfragmentar
+
+No LDF pode usar com mais tranquilidade, pois roda rápido. Não pode virar rotina. Pode usar em produção
+No MDF é necessário muito cuidado, fazer em ambiente de teste para entender o tempo que levará
+
+
+QUERY PARA VERIFICAR O TAMANHO DO LOG DAS DATABASES
+
+DBCC SQLPERF(LOGSPACE)
 
 
 
