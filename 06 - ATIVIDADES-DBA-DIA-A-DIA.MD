@@ -33,6 +33,7 @@ Todos pontos abaixo já vem um padrão do SQL Server, mas não é recomendado ma
   - MDF cresce rápido e LDF cresce lento
   - File Autogrowth
   - Sugestão(Não é uma regra):
+
 |          MDF Size           | File Autogrowth |
 |:---------------------------:|:---------------:|
 |           < 1 GB            |  50 MB – 200 MB |
